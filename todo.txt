@@ -1,0 +1,13 @@
+TODO:
+	
+make a better "transaction complete" popup
+
+add a "date added" field to Game
+
+autocomplete publishers, developers, genres
+
+work uploading images into blob
+
+make some sample games
+
+use datatable options to remove some of the UI

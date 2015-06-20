@@ -1,0 +1,106 @@
+html, body{
+	height: 100%;
+	overflow: hidden;
+}
+
+body{
+	background-color: #DDF;
+}
+ 
+p{
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#outerTable, #outerTable > tbody, #outerTable > tbody > tr, #outerTable > tbody > tr > td{
+	height: 100%;
+	vertical-align: top;
+
+}
+
+#rightCell{
+	padding-top: 50px;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#tabs, #tableWrapper{
+	display: inline-block;
+}
+
+#tabs{
+	height: 80%;
+	margin: 30px;
+	
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px #555;
+}
+
+.formTitle{
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 0;
+	margin: 0;
+}
+
+.fieldTitle{
+	font-weight: bold;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.fieldTitle, .addField{
+	display: inline-block;	
+}
+
+.field{
+	display: inline;
+}
+
+.addField{
+	margin-left: 5px;
+}
+
+.addField > span{
+	font-size: 12px !important;
+	padding: 5px !important;
+}
+
+.removeX{
+	font-family: 'Ubuntu', sans-serif;
+	cursor: pointer;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+.line{
+	border: 1px solid #A586AD;
+	margin: 0 auto;
+}
+
+#submit{
+	margin-top: 15px;
+}
+
+.noSelect{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#gameFormWrapper, #gameFormWrapper > form{
+	height: 100%;
+}
+
+#gameTable{
+	text-align: center;
+}
+
+.scrollbox{
+	margin-bottom: 5px;
+	height: 70%;
+	overflow: auto;
+}
+
