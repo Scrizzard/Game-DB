@@ -15,6 +15,7 @@ while ($row = $fetchResult->fetch_assoc()) {
 		$releaseYear = $row["releaseYear"];
 		$rating = $row["rating"];
 		$console = $row["consoleName"];
+		$dateAdded = $row["dateAdded"];
 
         echo "<tr>";
 
@@ -22,6 +23,8 @@ while ($row = $fetchResult->fetch_assoc()) {
         echo "<td>" . $console . "</td>";
         echo "<td>" . $releaseYear . "</td>";
         echo "<td>" . $rating . "</td>";
+		echo "<td>" . $dateAdded . "</td>";
+		
 
 		echo "</tr>";
     }

@@ -5,7 +5,11 @@
 window.onload = function(){
 	$("#tabs").tabs();
 	$(".addField").button();
-	$("#gameTable").DataTable();
+	
+	//watch out for capitalization of 'data'?
+	$("#gameTable").dataTable({
+		"lengthChange": false
+	});
 };
 
 function addField(ele, fieldName) {

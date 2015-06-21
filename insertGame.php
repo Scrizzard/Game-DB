@@ -53,15 +53,16 @@ function insertGame($largestID, $conn) {
 	$title = '"' . $_POST["title"] . '"';
 	$releaseYear = '"' . $_POST["releaseYear"] . '"';
 	$rating = '"' . $_POST["rating"] . '"';
-	
+	$today = date("y, m, d");
+	echo $today;
 	if(is_null($rating)){
 		$rating = '?';
 	}
 	
 	//TODO: image stuff here
 	
-	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, rating) " . 
-			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ");";
+	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, rating, dateAdded) " . 
+			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ", " . $today . ");";
 	doQuery($conn, $insertQuery);
 }
 

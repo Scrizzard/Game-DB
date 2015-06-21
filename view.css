@@ -14,10 +14,10 @@ p{
 #outerTable, #outerTable > tbody, #outerTable > tbody > tr, #outerTable > tbody > tr > td{
 	height: 100%;
 	vertical-align: top;
-
 }
 
 #rightCell{
+	min-width: 400px;
 	padding-top: 50px;
 	font-family: 'Ubuntu', sans-serif;
 }

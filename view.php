@@ -148,9 +148,10 @@
 							<th>Console</th>
 							<th>Year</th>
 							<th>Rating</th>		
+							<th>Date Added</th>		
 						</thead>
 			
-					<?php include('fetch.php') ?>
+					<?php include('fetchTable.php') ?>
 						
 					</table>
 				</td>

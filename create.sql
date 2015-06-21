@@ -9,6 +9,7 @@ CREATE TABLE Game (
 	releaseYear INTEGER NOT NULL,
 	coverImage MEDIUMBLOB DEFAULT NULL,
 	rating CHAR DEFAULT NULL,
+	dateAdded DATE NOT NULL,
 	
 	PRIMARY KEY Game(gameID)
 );
