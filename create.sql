@@ -8,6 +8,7 @@ CREATE TABLE Game (
 	region VARCHAR(32) DEFAULT NULL,
 	releaseYear INTEGER NOT NULL,
 	coverImage MEDIUMBLOB DEFAULT NULL,
+	imageType VARCHAR(16) DEFAULT NULL,
 	rating CHAR DEFAULT NULL,
 	dateAdded DATE NOT NULL,
 	
@@ -85,16 +86,46 @@ CREATE TABLE GenreGame (
 		REFERENCES Genre(genreID)
 );
 
-INSERT INTO Console (consoleName, consoleFirstParty, consoleReleaseYear, isHandheld)
-	VALUES ('Xbox', 'Microsoft', '2001', b'0'),
-		   ('Xbox 360', 'Microsoft', '2005', b'0'),
-		   ('PSP', 'Sony', '2005', b'1'),
-		   ('PSX', 'Sony', '1995', b'0'),
-		   ('PS2', 'Sony', '2000', b'0'),
-		   ('Gameboy', 'Nintendo', '1989', b'1'),
-		   ('Gameboy Color', 'Nintendo', '1998', b'1'),
-		   ('Gameboy Advance', 'Nintendo', '2001', b'1'),
-		   ('DS', 'Nintendo', '2004', b'1'),
-		   ('Gamecube', 'Nintendo', '2001', b'0'),
-		   ('Wii', 'Nintendo', '2006', b'0'),
-		   ('PC', 'N/A', 'N/A', b'0');
+INSERT INTO Console (consoleID, consoleName, consoleFirstParty, consoleReleaseYear, isHandheld)
+	VALUES (1, 'Xbox', 'Microsoft', '2001', b'0'),
+		   (2, 'Xbox 360', 'Microsoft', '2005', b'0'),
+		   (3, 'PSP', 'Sony', '2005', b'1'),
+		   (4, 'PSX', 'Sony', '1995', b'0'),
+		   (5, 'PS2', 'Sony', '2000', b'0'),
+		   (6, 'Gameboy', 'Nintendo', '1989', b'1'),
+		   (7, 'Gameboy Color', 'Nintendo', '1998', b'1'),
+		   (8, 'Gameboy Advance', 'Nintendo', '2001', b'1'),
+		   (9, 'DS', 'Nintendo', '2004', b'1'),
+		   (10, 'Gamecube', 'Nintendo', '2001', b'0'),
+		   (11, 'Wii', 'Nintendo', '2006', b'0'),
+		   (12, 'PC', 'N/A', 'N/A', b'0');
+
+INSERT INTO Game (gameId, title, region, releaseYear, rating, dateAdded)
+VALUES (1, 'Dark Souls', 'US', 2011, 'M', '2015-6-20'),
+	   (2, 'Final Fantasy Tactics: The War of the Lions', 'NA', 2007, 'T', '2015-6-20'),
+	   (3, 'Robin Hood: The Legend of Sherwood', 'NA', 2002, 'T', '2015-6-20'),
+	   (4, 'Dragon Warrior Monsters', 'NA', 2000, 'E', '2015-6-20'),
+	   (5, 'Advance Wars', 'NA', 2001, 'E', '2015-6-20'),
+	   (6, 'Hotel Dusk Room 215', 'NA', 2007, 'T', '2015-6-20'),
+	   (7, 'Bond 007: Nightfire', 2002, 'NA', 'T', '2015-6-20'),
+	   (8, 'Trauma Center: Second Opinion', 'NA', 2006, 'T', '2015-6-20'),
+	   (9, "Raze's Hell", 'NA', 2005, 'T', '2015-6-20'),
+	   (10, 'Chromehounds', 'NA', 2006, 'T', '2015-6-20'),
+	   (11, 'Legend of Dragoon', 'NA', 2000, 'T', '2015-6-20'),
+	   (12, 'Katamari Damacy', 'NA', 2004, 'E', '2015-6-20'),
+	   (13, 'Year Walk', 'NA', 2004, 'T', '2015-6-20');
+	   
+INSERT INTO ConsoleGame (gameID, consoleID)
+VALUES (1, 2),
+	   (2, 3),
+	   (3, 12),
+	   (4, 7),
+	   (5, 8),
+	   (6, 9),
+	   (7, 10),
+	   (8, 11),
+	   (9, 1),
+	   (10, 2),
+	   (11, 4),
+	   (12, 5),
+	   (13, 12);

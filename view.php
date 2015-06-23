@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="datatable/jquery.dataTables.min.js"></script>
 		
 		<script type="text/javascript" src="view.js"></script>
+		<script type="text/javascript" src="fetchGamePage.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.structure.min.css">
@@ -41,7 +42,7 @@
 							
 							<div class="line"></div>
 							
-							<form action="view.php?submitted=yup" method="post">
+							<form action="view.php?submitted=yup" method="post" enctype="multipart/form-data">
 								
 								<div class="scrollbox">
 				
@@ -80,7 +81,7 @@
 									<div>
 										<p class="fieldTitle">Image URL</p>
 										<br/>
-										<input type="text" name="URL">
+    									<input type="file" name="coverImage">
 									</div>
 					
 									<div>

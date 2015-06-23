@@ -104,3 +104,10 @@ p{
 	overflow: auto;
 }
 
+.oddStripe{
+	background-color: #DDF !important;
+}
+
+.gameID{
+	display: none;
+}

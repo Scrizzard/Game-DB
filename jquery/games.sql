@@ -1,0 +1,15 @@
+USE Games;
+
+DROP TABLE Game;
+CREATE TABLE Game (
+	gameID INTEGER, 
+	title VARCHAR(128) NOT NULL,
+	region VARCHAR(32) DEFAULT NULL,
+	releaseYear INTEGER NOT NULL,
+	coverImage MEDIUMBLOB DEFAULT NULL,
+	rating CHAR DEFAULT NULL,
+	dateAdded DATE NOT NULL,
+	
+	PRIMARY KEY Game(gameID)
+);
+	   

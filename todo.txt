@@ -2,12 +2,14 @@ TODO:
 	
 make a better "transaction complete" popup
 
-add a "date added" field to Game
-
 autocomplete publishers, developers, genres
 
 work uploading images into blob
 
-make some sample games
+add a way to quickly edit info
 
-use datatable options to remove some of the UI
+add a way to remove games
+
+add a way to view developer, producer, genre, image
+
+find missing datatable sort images

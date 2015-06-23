@@ -12,7 +12,6 @@ if (validGame()) {
 	insertFields($conn, $largestID, 'publisher');
 	insertFields($conn, $largestID, 'developer');
 	insertEntryGamePair($conn, $_POST["gameConsole"], $largestID, 'console');
-		
 	
 	makePopup("Transaction successful!");
 }
@@ -53,16 +52,28 @@ function insertGame($largestID, $conn) {
 	$title = '"' . $_POST["title"] . '"';
 	$releaseYear = '"' . $_POST["releaseYear"] . '"';
 	$rating = '"' . $_POST["rating"] . '"';
-	$today = date("y, m, d");
-	echo $today;
+	$today = '"' . date("Y-m-d") . '"';
+	$image = $_FILES["coverImage"];
+	$blob = '"' . "" . '"';
+	$mime = '"' . "" . '"';
+	
+	//handle empty rating field
 	if(is_null($rating)){
 		$rating = '?';
 	}
 	
-	//TODO: image stuff here
+	//check for valid image
+	if(validImage($image)){
+		$blob = '"' . imageToBlob($image) . '"';
+		$mime = '"' . $image["type"] . '"';
+		echo $mime;
+	}
+	else{
+		echo "image is either too large (>16mb) or not actually a valid image";
+	}
 	
-	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, rating, dateAdded) " . 
-			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ", " . $today . ");";
+	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, rating, dateAdded, coverImage, imageType) " . 
+			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ", " . $today . ", " . $blob . ", " . $mime . ");";
 	doQuery($conn, $insertQuery);
 }
 
@@ -136,6 +147,25 @@ function validGame() {
 	
 	return $hasTitle && $hasReleaseYear && $hasDeveloper && $hasGenre && $hasRegion;
 	
+}
+
+function validImage($image){
+
+    $isImage = getimagesize($image["tmp_name"]) !== FALSE;
+	$tooLarge = $image["size"] > 16000000;
+  	 
+	return($isImage && !$tooLarge);
+}
+
+function imageToBlob($image){
+
+	$tmpName = $image['tmp_name'];
+	$fp = fopen($tmpName, 'r');
+	$content = fread($fp, filesize($tmpName));
+	$content = addslashes($content);
+	fclose($fp);
+	
+	return $content;
 }
 
 ?>

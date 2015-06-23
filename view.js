@@ -1,15 +1,18 @@
-//TODO: make it possible to remove the first element.
-//this would require inserting an X button after the first field is added,
-//and removing it if there is ever only one field left
-
 window.onload = function(){
 	$("#tabs").tabs();
 	$(".addField").button();
 	
-	//watch out for capitalization of 'data'?
 	$("#gameTable").dataTable({
-		"lengthChange": false
+		"lengthChange": false,
+        "stripeClasses": [ 'evenStripe', 'oddStripe'],
+        //maybe add some math to determine pageLength as a function of monitor resolution
+        "pageLength": 15,
 	});
+
+
+	$("#gameTable > tbody > tr").click(function(){fetchGamePage(this);});
+
+	
 };
 
 function addField(ele, fieldName) {

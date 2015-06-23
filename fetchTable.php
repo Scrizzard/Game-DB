@@ -11,6 +11,7 @@ $fetchQuery = "SELECT * " .
 $fetchResult = doQuery($conn, $fetchQuery); 
 
 while ($row = $fetchResult->fetch_assoc()) {
+		$gameID = $row["gameID"];
 		$title = $row["title"];
 		$releaseYear = $row["releaseYear"];
 		$rating = $row["rating"];
@@ -19,7 +20,7 @@ while ($row = $fetchResult->fetch_assoc()) {
 
         echo "<tr>";
 
-        echo "<td>" . $title . "</td>";
+        echo "<td>" . $title . "<p class='gameID'>" . $gameID . "</p></td>";
         echo "<td>" . $console . "</td>";
         echo "<td>" . $releaseYear . "</td>";
         echo "<td>" . $rating . "</td>";
@@ -28,5 +29,4 @@ while ($row = $fetchResult->fetch_assoc()) {
 
 		echo "</tr>";
     }
-
 ?>
