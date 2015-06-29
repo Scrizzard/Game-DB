@@ -9,11 +9,21 @@ window.onload = function(){
         "pageLength": 15,
 	});
 
-
-	$("#gameTable > tbody > tr").click(function(){fetchGamePage(this);});
-
-	
+	$("#gameTable > tbody > tr").click(function(){fetchGameView(this);});
 };
+
+function fetchGameView(ele){
+	var gameID = $(ele).find(".gameID").html();
+	
+	$.ajax({
+	    data: 'gameID=' + gameID,
+	    url: 'fetchGameView.php',
+	    method: 'POST',
+	    success: function(msg) {
+	        $("body").append(msg);
+	    }
+	});
+}
 
 function addField(ele, fieldName) {
 	var container = $(ele).parent();

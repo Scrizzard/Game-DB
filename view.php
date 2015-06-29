@@ -81,7 +81,7 @@
 									<div>
 										<p class="fieldTitle">Image URL</p>
 										<br/>
-    									<input type="file" name="coverImage">
+    									<input id="imageInput" type="file" name="coverImage">
 									</div>
 					
 									<div>

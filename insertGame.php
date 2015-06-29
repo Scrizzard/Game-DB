@@ -66,10 +66,9 @@ function insertGame($largestID, $conn) {
 	if(validImage($image)){
 		$blob = '"' . imageToBlob($image) . '"';
 		$mime = '"' . $image["type"] . '"';
-		echo $mime;
 	}
 	else{
-		echo "image is either too large (>16mb) or not actually a valid image";
+		////makePopup("Bad or oversized image!");
 	}
 	
 	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, rating, dateAdded, coverImage, imageType) " . 

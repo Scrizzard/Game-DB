@@ -4,12 +4,12 @@ make a better "transaction complete" popup
 
 autocomplete publishers, developers, genres
 
-work uploading images into blob
-
 add a way to quickly edit info
 
 add a way to remove games
 
-add a way to view developer, producer, genre, image
+find missing datatable sort arrows
 
-find missing datatable sort images
+add events to escape from a gameview (esc, x button)
+
+add scrollable/dropdown/accordion dev/pub/genres
