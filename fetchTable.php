@@ -25,6 +25,7 @@ while ($row = $fetchResult->fetch_assoc()) {
         echo "<td>" . $releaseYear . "</td>";
         echo "<td>" . $rating . "</td>";
 		echo "<td>" . $dateAdded . "</td>";
+		echo "<td><p class='xButton noMargin'>X<p></td>";
 		
 
 		echo "</tr>";

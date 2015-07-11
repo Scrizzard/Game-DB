@@ -73,7 +73,7 @@ p, .gameField, .bold{
 }
 
 .line{
-	border: 1px solid #A586AD;
+	border: 1px solid #BBC;
 	margin: 0 auto;
 }
 
@@ -98,12 +98,24 @@ p, .gameField, .bold{
 	text-align: center;
 }
 
-
 .scrollbox{
 	margin-bottom: 5px;
 	height: 70%;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
+}
+
+.oddStripe, .evenStripe{
+	cursor: pointer;
+}
+
+/*may not be supported everywhere*/
+#gameTable > tbody > tr > td:nth-child(1){
+	border-left: 1px solid black;
+}
+
+#gameTable > tbody > tr > td:nth-last-child(1){
+	border-right: 1px solid black;
 }
 
 .oddStripe{
@@ -197,4 +209,10 @@ p, .gameField, .bold{
 
 .noMargin{
 	margin: 0;
+}
+
+/*this is a hack, I wish I could vertically center the buttons properly*/
+.xButton{
+	position: relative;
+	top: 7px;
 }

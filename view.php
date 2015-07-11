@@ -143,13 +143,14 @@
 					</div>
 				</td>
 				<td id="rightCell">
-					<table id="gameTable">
-						<thead>
+					<table id="gameTable" class="row-border compact">
+						<thead class="noSelect">
 							<th>Title</th>
 							<th>Console</th>
 							<th>Year</th>
 							<th>Rating</th>		
-							<th>Date Added</th>		
+							<th>Date Added</th>
+							<th>Delete</th>
 						</thead>
 			
 					<?php include('fetchTable.php') ?>

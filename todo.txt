@@ -8,8 +8,12 @@ add a way to quickly edit info
 
 add a way to remove games
 
-find missing datatable sort arrows
-
-add events to escape from a gameview (esc, x button)
-
 add scrollable/dropdown/accordion dev/pub/genres
+
+add price
+
+STRETCH:
+
+clicking on a platform, publisher, dev, or genre in a game view does a search for all matching
+
+add better searching/sorting methods
