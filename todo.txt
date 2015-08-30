@@ -6,8 +6,6 @@ autocomplete publishers, developers, genres
 
 add a way to quickly edit info
 
-add a way to remove games
-
 add scrollable/dropdown/accordion dev/pub/genres
 
 add price
@@ -17,3 +15,13 @@ STRETCH:
 clicking on a platform, publisher, dev, or genre in a game view does a search for all matching
 
 add better searching/sorting methods
+
+make the datatable sort arrow show up (missing image in source files, perhaps?)
+
+allow mouse-free controls
+
+integrate with personal website
+
+insert all my games
+
+add an extension to view specific consoles (colors, versions, etc)

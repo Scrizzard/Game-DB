@@ -51,9 +51,11 @@ CREATE TABLE DeveloperGame(
 	developerID INTEGER,
 	
 	FOREIGN KEY (gameID) 
-		REFERENCES Game(gameID),
+		REFERENCES Game(gameID)
+		ON DELETE CASCADE,
 	FOREIGN KEY (developerID) 
 		REFERENCES Developer(developerID)
+		ON DELETE CASCADE
 );
 
 CREATE TABLE PublisherGame(
@@ -61,9 +63,11 @@ CREATE TABLE PublisherGame(
 	publisherID INTEGER,
 	
 	FOREIGN KEY (gameID) 
-		REFERENCES Game(gameID),
+		REFERENCES Game(gameID)
+		ON DELETE CASCADE,
 	FOREIGN KEY (PublisherID) 
 		REFERENCES Publisher(publisherID)
+		ON DELETE CASCADE
 );
 
 CREATE TABLE ConsoleGame (
@@ -71,9 +75,11 @@ CREATE TABLE ConsoleGame (
 	consoleID INTEGER,
 	
 	FOREIGN KEY (gameID) 
-		REFERENCES Game(gameID),
+		REFERENCES Game(gameID)
+		ON DELETE CASCADE,
 	FOREIGN KEY (consoleID) 
 		REFERENCES Console(consoleID)
+		ON DELETE CASCADE
 );
 
 CREATE TABLE GenreGame (
@@ -81,9 +87,11 @@ CREATE TABLE GenreGame (
 	genreID INTEGER,
 	
 	FOREIGN KEY (gameID) 
-		REFERENCES Game(gameID),
+		REFERENCES Game(gameID)
+		ON DELETE CASCADE,
 	FOREIGN KEY (genreID) 
 		REFERENCES Genre(genreID)
+		ON DELETE CASCADE
 );
 
 INSERT INTO Console (consoleID, consoleName, consoleFirstParty, consoleReleaseYear, isHandheld)

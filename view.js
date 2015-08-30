@@ -1,31 +1,80 @@
+/*****************************************************************/
+/* Onload Events
+/*****************************************************************/
+
 window.onload = function(){
 
-	//initialize jQuery widgets
+	initializeDataTable();
 	$("#tabs").tabs();
 	$(".addField, .xButton").button();
 	
-	//datatable for viewing and sorting gmaes
+
+
+    addViewFetchListener();
+    addViewHideListener();
+    addDeletionListener();
+    
+};
+
+/*****************************************************************/
+/* Initialize Widgets and Listeners
+/*****************************************************************/
+
+//create or refresh the game DataTable
+function initializeDataTable(){
 	$("#gameTable").dataTable({
+		"bDestroy": true,
 		"lengthChange": false,
         "stripeClasses": [ 'evenStripe', 'oddStripe'],
         //maybe add some math to determine pageLength as a function of monitor resolution
         "pageLength": 15
-	});
+	});	
+}
 
-	//event listener to open up an individual game view
-	$("#gameTable > tbody").on('click', 'tr', function(){
-		fetchGameView(this);
+//create event listener to open up an individual game view
+function addViewFetchListener(){
+	$("#gameTable > tbody").on('click', 'td:not(:last-child)', function(){
+		var id = $(this).closest('tr').find("td:first > .gameID").html();
+		fetchGameView(id);
+	});
+}
+	
+//create event listener to delete records when we press the X button
+function addDeletionListener(){
+	$("#gameTable > tbody").on('click', '.xButton', function(){
+		var gameRow = $(this).closest('tr');
+		var id = gameRow.find("td:first > .gameID").html();
+
+		$("#gameTable").dataTable().fnDestroy();
+		gameRow.remove();
+		initializeDataTable();
+		deleteGame(id);
+	});
+}
+
+//create event listeners to close an individual game view
+function addViewHideListener(){
+	$(document).keypress(function(e){
+		if(e.which = 27){ //27 is 'esc' keycode
+			$(".gameViewWrapper, .gameView").remove();
+		}
 	});
 	
-    addRemovalListeners();
-};
+	//also close the view if we click outside
+	$(document).on('click', ".gameViewWrapper", function(){
+		$(".gameViewWrapper, .gameView").remove();
+	});
+}
+
+/*****************************************************************/
+/* Perform Events
+/*****************************************************************/
 
 //perform an AJAX request for a game view
-function fetchGameView(ele){
-	var gameID = $(ele).find(".gameID").html();
+function fetchGameView(id){
 	
 	$.ajax({
-	    data: 'gameID=' + gameID,
+	    data: 'gameID=' + id,
 	    url: 'fetchGameView.php',
 	    method: 'POST',
 	    success: function(msg) {
@@ -34,23 +83,20 @@ function fetchGameView(ele){
 	});
 }
 
-//create event listeners to close an individual game view
-function addRemovalListeners(){
-	$(document).keypress(function(e){
-		if(e.which = 27){ //27 is 'esc' keycode
-			removeGameView();
-		}
-	});
-	
-	$(document).on('click', ".gameViewWrapper", function(){
-		console.log("trigger");
-		removeGameView();
+function deleteGame(id){
+	$.ajax({
+	    data: 'gameID=' + id,
+	    url: 'dropGame.php',
+	    method: 'POST',
+	    success: function(msg) {
+	        console.log(msg);
+	    }
 	});
 }
 
-function removeGameView(){
-	$(".gameViewWrapper, .gameView").remove();
-}
+/*****************************************************************/
+/* Miscellaneous (TODO: sort better)
+/*****************************************************************/
 
 //generic function for adding a new input field (for developer, publisher, genre)
 function addField(ele, fieldName) {
@@ -78,7 +124,6 @@ function removeField(ele, trimLength){
 
 //decrement the trailing number name attribute of each subsequent element
 function decrementName(ele, trimLength){
-
 	ele.nextAll('input').each(function(index, value){
 		var name = $(this).attr('name');
 		var fieldName = name.slice(0, trimLength);
