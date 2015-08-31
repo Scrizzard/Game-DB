@@ -1,5 +1,4 @@
 <?php include('header.php') ?>
-<?php include('tools.php') ?>
 
 <?php
 $gameID = $_POST["gameID"];

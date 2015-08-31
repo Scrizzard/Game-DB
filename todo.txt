@@ -2,13 +2,15 @@ TODO:
 	
 make a better "transaction complete" popup
 
-autocomplete publishers, developers, genres
-
 add a way to quickly edit info
 
 add scrollable/dropdown/accordion dev/pub/genres
 
 add price
+
+add seed data for publishers and genres
+
+ESRB/Region should be categories
 
 STRETCH:
 

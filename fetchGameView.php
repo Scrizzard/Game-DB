@@ -1,5 +1,4 @@
 <?php include('header.php') ?>
-<?php include('tools.php') ?>
 
 <?php
 /******************************************************************************
@@ -86,7 +85,7 @@ function displayConsole($conn, $gameID){
 }
 
 /******************************************************************************
-* Fetch and print a game's iterable attribute (genres, developers, producers)
+* Fetch and print one game's iterable attribute (genres, developers, producers)
 ******************************************************************************/
 
 function displayIterableGameAttributes($conn, $gameID, $attrBase){

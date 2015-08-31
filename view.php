@@ -8,7 +8,6 @@
 		<script type="text/javascript" src="datatable/jquery.dataTables.min.js"></script>
 		
 		<script type="text/javascript" src="view.js"></script>
-		<script type="text/javascript" src="fetchGamePage.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.structure.min.css">
@@ -19,7 +18,6 @@
 		<link rel="stylesheet" type="text/css" href="view.css">
 		
 		<?php include('header.php') ?>
-		<?php include('tools.php') ?>
 		<?php include('insertGame.php') ?>
 		<?php include('insertConsole.php') ?>
 		
@@ -52,7 +50,7 @@
 										<input type="text" name="title">
 									</div>
 									
-									<div>
+									<div id="consoleInputWrapper">
 										<p class="fieldTitle">Console</p>
 										</br>
 										<select name="gameConsole">
@@ -66,13 +64,13 @@
 										<input type="text" name="releaseYear">
 									</div>
 					
-									<div>
+									<div id="ESRBInputWrapper">
 										<p class="fieldTitle">ESRB Rating</p>
 										<br/>
 										<input type="text" name="rating">
 									</div>
 					
-									<div>
+									<div id="regionInputWrapper">
 										<p class="fieldTitle">Region</p>
 										<br/>
 										<input type="text" name="region">
@@ -84,7 +82,7 @@
     									<input id="imageInput" type="file" name="coverImage">
 									</div>
 					
-									<div>
+									<div id="publisherInputWrapper">
 										<p class="fieldTitle">Publisher</p>
 										<p class="addField" type="button" onclick="addField(this, 'publisher')">add</p>
 										<br/>
@@ -92,7 +90,7 @@
 										<br/>
 									</div>
 									
-									<div>
+									<div id="developerInputWrapper">
 										<p class="fieldTitle">Developer</p>
 										<p class="addField" type="button" onclick="addField(this, 'developer')">add</p>
 										<br/>
@@ -100,7 +98,7 @@
 										<br/>
 									</div>
 									
-									<div>
+									<div id="genreInputWrapper">
 										<p class="fieldTitle">Genre</p>
 										<p class="addField" type="button" onclick="addField(this, 'genre')">add</p>
 										<br/>

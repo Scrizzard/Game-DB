@@ -13,7 +13,7 @@ window.onload = function(){
     addViewFetchListener();
     addViewHideListener();
     addDeletionListener();
-    
+    addAutocompletion();    
 };
 
 /*****************************************************************/
@@ -66,13 +66,30 @@ function addViewHideListener(){
 	});
 }
 
+//Stores each JSON autocomplete suggestion list
+function addAutocompletion(){
+	autocompleteField("developer");
+	autocompleteField("publisher");
+	autocompleteField("genre");	
+}
+
+function autocompleteField(attrBase){
+	$.ajax({
+	    data: 'table=' + attrBase,
+	    url: 'fetchNames.php',
+	    method: 'POST',
+	    success: function(list) {
+  	    	$("#" + attrBase + "InputWrapper > input").autocomplete({source: $.parseJSON(list)});
+	    }
+	});
+}
+
 /*****************************************************************/
-/* Perform Events
+/* AJAX Queries
 /*****************************************************************/
 
-//perform an AJAX request for a game view
+//fetch and display a game's view
 function fetchGameView(id){
-	
 	$.ajax({
 	    data: 'gameID=' + id,
 	    url: 'fetchGameView.php',
@@ -83,6 +100,7 @@ function fetchGameView(id){
 	});
 }
 
+//drop the game with the passed ID
 function deleteGame(id){
 	$.ajax({
 	    data: 'gameID=' + id,
@@ -93,6 +111,9 @@ function deleteGame(id){
 	    }
 	});
 }
+
+//fetch the JSON-encoded name column of a passed table
+
 
 /*****************************************************************/
 /* Miscellaneous (TODO: sort better)
