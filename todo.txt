@@ -6,8 +6,6 @@ add a way to quickly edit info
 
 region should be category
 
-organize all files into respective folders (css/php/html)
-
 gracefully handle empty input
 
 add a readme.txt (explain DB table/attr naming scheme)

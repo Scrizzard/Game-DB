@@ -76,7 +76,7 @@ function addAutocompletion(){
 function autocompleteField(attrBase){
 	$.ajax({
 	    data: 'table=' + attrBase,
-	    url: 'fetchNames.php',
+	    url: 'PHP/fetchNames.php',
 	    method: 'POST',
 	    success: function(list) {
   	    	$("#" + attrBase + "InputWrapper > input").autocomplete({source: $.parseJSON(list)});
@@ -92,7 +92,7 @@ function autocompleteField(attrBase){
 function fetchGameView(id){
 	$.ajax({
 	    data: 'gameID=' + id,
-	    url: 'fetchGameView.php',
+	    url: 'PHP/fetchGameView.php',
 	    method: 'POST',
 	    success: function(msg) {
 	        $("body").append(msg);
@@ -104,7 +104,7 @@ function fetchGameView(id){
 function deleteGame(id){
 	$.ajax({
 	    data: 'gameID=' + id,
-	    url: 'dropGame.php',
+	    url: 'PHP/dropGame.php',
 	    method: 'POST',
 	    success: function(msg) {
 	        console.log(msg);

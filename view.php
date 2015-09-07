@@ -7,7 +7,7 @@
 		<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="datatable/jquery.dataTables.min.js"></script>
 
-		<script type="text/javascript" src="view.js"></script>
+		<script type="text/javascript" src="JS/view.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css">
 		<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.structure.min.css">
@@ -15,11 +15,11 @@
 		<link rel="stylesheet" type="text/css" href="datatable/jquery.dataTables.min.css">
 
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu|Asap' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="view.css">
+		<link rel="stylesheet" type="text/css" href="CSS/view.css">
 
-		<?php include('header.php') ?>
-		<?php include('insertGame.php') ?>
-		<?php include('insertConsole.php') ?>
+		<?php include('PHP/header.php') ?>
+		<?php include('PHP/insertGame.php') ?>
+		<?php include('PHP/insertConsole.php') ?>
 
 	</header>
 
@@ -65,7 +65,7 @@
 									</br>
 									<select name="gameConsole">
 										<!--This is probably bad practice, but $field is used in populateFieldDDL.php.-->
-										<?php $field = 'console'; include('populateFieldDDL.php')?>
+										<?php $field = 'console'; include('PHP/populateFieldDDL.php')?>
 									</select>
 								</div>
 
@@ -84,7 +84,7 @@
 									</br>
 									<select name="rating">
 										<!--This is probably bad practice, but $field is used in populateFieldDDL.php.-->
-										<?php $field = 'rating'; include('populateFieldDDL.php')?>
+										<?php $field = 'rating'; include('PHP/populateFieldDDL.php')?>
 									</select>
 								</div>
 
@@ -203,7 +203,7 @@
 						<th>Delete</th>
 					</thead>
 
-					<?php include('fetchTable.php') ?>
+					<?php include('PHP/fetchTable.php') ?>
 
 				</table></td>
 			</tr>
