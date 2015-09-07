@@ -2,11 +2,11 @@ DROP DATABASE IF EXISTS Games;
 CREATE DATABASE Games;
 USE Games;
 
-CREATE TABLE ESRB(
+CREATE TABLE Rating(
 	ratingID INTEGER AUTO_INCREMENT,
 	ratingName VARCHAR(8),
 	
-	PRIMARY KEY ESRB(ratingID)
+	PRIMARY KEY Rating(ratingID)
 );
 
 CREATE TABLE Game (
@@ -18,10 +18,11 @@ CREATE TABLE Game (
 	imageType VARCHAR(16) DEFAULT NULL,
 	ratingID INTEGER NOT NULL,
 	dateAdded DATE NOT NULL,
+	priceURL VARCHAR (128) DEFAULT NULL,
 	
 	PRIMARY KEY Game(gameID),
 	FOREIGN KEY (ratingID)
-	REFERENCES ESRB(ratingID)
+	REFERENCES Rating(ratingID)
 );
 
 CREATE TABLE Genre (
@@ -103,7 +104,7 @@ CREATE TABLE GenreGame (
 		ON DELETE CASCADE
 );
 
-INSERT INTO ESRB (ratingID, ratingName)
+INSERT INTO Rating (ratingID, ratingName)
 VALUES (1, 'E'),
 	   (2, 'E10'),
 	   (3, 'T'),

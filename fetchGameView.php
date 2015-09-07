@@ -40,7 +40,7 @@ echo '</div>';
 
 function displayBasic($conn, $gameID){
 	$fetchQuery = "SELECT * FROM Game " .
-				   "JOIN ESRB ON Game.ratingID = ESRB.ratingID " .
+				   "JOIN Rating ON Game.ratingID = Rating.ratingID " .
 				   "WHERE gameID = " . $gameID . ";";
 	$result = doQuery($conn, $fetchQuery);
 	
@@ -49,9 +49,15 @@ function displayBasic($conn, $gameID){
 	$releaseYear = $row["releaseYear"];
 	$rating = $row["ratingName"];
 	$region = $row["region"];
-	
+	$priceURL = $row["priceURL"];
+	$price = fetchGamePrice($priceURL);
 	
 	echo '<p class="gameHeader">' . $title . ' (' . $releaseYear .  ')</p>';
+
+	echo '<div class="gameFieldWrapper">';
+	echo 	'<span class="bold">Complete Price: </span> <span class="gameField">' . $price . '</span>';
+	echo '</div>';
+	echo '<br/>';
 
 	echo '<div class="gameFieldWrapper">';
 	echo 	'<span class="bold">Rating: </span> <span class="gameField">' . $rating . '</span>';
@@ -60,7 +66,7 @@ function displayBasic($conn, $gameID){
 	
 	echo '<div class="gameFieldWrapper">';
 	echo 	'<span class="bold">Region: </span> <span class="gameField">' . $region . '</span>';
-	echo '</div>';
+	echo '</div>';	
 	echo '<br/>';
 }
 
@@ -135,13 +141,12 @@ function displayImage($conn, $gameID){
 ******************************************************************************/
 
 function createImgTag($rawImage, $type){
-  if($rawImage == NULL){
+  if(empty($rawImage)){
   	return "<p>image not found</p>";
   }
   
   else{ //$rawImage is not NULL
     $base64 = base64_encode($rawImage); 
- 	$source = 'data:' . $type . ';base64,' . $base64;
   	$html = '<img class="gameImage" src="' . $source . '"/>';
   	return $html;
   }

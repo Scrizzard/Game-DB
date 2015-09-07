@@ -56,4 +56,25 @@ function fetchNameAttr($attrBase, $conn){
 	}
 	return $attrArray;	
 }
+
+/******************************************************************************
+* Parse the "complete price" out of a videogames.pricecharting.com link.
+* Note that this functionality depends on unchanging HTML and URL of an external site.
+* So yeah, this will probably break in a few years. (Sept. 2015)
+* 
+* Also, use the API you stupid fuck.
+* Here's an example. The two GET parameters are t, the access token, and id, the game ID. 
+* https://ae.pricecharting.com/api/product?t=c0b53bce27c1bdab90b1605249e600dc43dfd1d5&id=5743
+******************************************************************************/
+function fetchGamePrice($url){
+	if (empty($url)){
+		return "N/A";
+	}
+	
+	//TODO: check for error response
+	$html = file_get_contents($url);
+	$pattern = '/(?<=complete_price">\n {16}<span class="price">\n {16})\$[\d\.]+/';
+	preg_match ($pattern, $html, $match);
+	return $match[0]; 
+}
 ?>

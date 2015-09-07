@@ -1,7 +1,7 @@
 <?php
 
 /******************************************************************************
-* Driver
+* Driver (Insert all the game bits)
 ******************************************************************************/
 
 if (validGame()) {
@@ -12,7 +12,7 @@ if (validGame()) {
 	insertFields($conn, $largestID, 'publisher');
 	insertFields($conn, $largestID, 'developer');
 	insertEntryGamePair($conn, $_POST["gameConsole"], $largestID, 'console');
-	
+		
 	makePopup("Transaction successful!");
 }
 else{
@@ -52,10 +52,11 @@ function insertGame($largestID, $conn) {
 	$title = '"' . $_POST["title"] . '"';
 	$releaseYear = '"' . $_POST["releaseYear"] . '"';
 	$rating = '"' . $_POST["rating"] . '"';
+	$priceURL = '"' . $_POST["price"] . '"';
 	$today = '"' . date("Y-m-d") . '"';
 	$image = $_FILES["coverImage"];
-	$blob = '"' . "" . '"';
-	$mime = '"' . "" . '"';
+	$blob = '""';
+	$mime = '""';
 	
 	//handle empty rating field
 	if(is_null($rating)){
@@ -71,8 +72,8 @@ function insertGame($largestID, $conn) {
 		////makePopup("Bad or oversized image!");
 	}
 	
-	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, rating, dateAdded, coverImage, imageType) " . 
-			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ", " . $today . ", " . $blob . ", " . $mime . ");";
+	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, ratingID, priceURL, dateAdded, coverImage, imageType) " . 
+			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ", " . $priceURL . ", " . $today . ", " . $blob . ", " . $mime . ");";
 	doQuery($conn, $insertQuery);
 }
 
@@ -149,9 +150,9 @@ function validGame() {
 }
 
 function validImage($image){
-
-    $isImage = getimagesize($image["tmp_name"]) !== FALSE;
-	$tooLarge = $image["size"] > 16000000;
+	
+    $isImage = $image["tmp_name"] && getimagesize($image["tmp_name"]) !== FALSE;
+	$tooLarge = $image["size"] && $image["size"] > 16000000;
   	 
 	return($isImage && !$tooLarge);
 }

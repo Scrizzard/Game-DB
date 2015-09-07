@@ -4,13 +4,17 @@ make a better "transaction complete" popup
 
 add a way to quickly edit info
 
-add scrollable/dropdown/accordion dev/pub/genres
+region should be category
 
-add price
+organize all files into respective folders (css/php/html)
 
-add seed data for publishers and genres
+gracefully handle empty input
 
-ESRB/Region should be categories
+add a readme.txt (explain DB table/attr naming scheme)
+
+explain why queries fail to go through on bad input
+
+fix the price fetching system
 
 STRETCH:
 
@@ -27,3 +31,5 @@ integrate with personal website
 insert all my games
 
 add an extension to view specific consoles (colors, versions, etc)
+
+Add a cached price in case site goes down/url changes/html structure changes
