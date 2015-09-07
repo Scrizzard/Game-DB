@@ -2,6 +2,13 @@ DROP DATABASE IF EXISTS Games;
 CREATE DATABASE Games;
 USE Games;
 
+CREATE TABLE ESRB(
+	ratingID INTEGER AUTO_INCREMENT,
+	ratingName VARCHAR(8),
+	
+	PRIMARY KEY ESRB(ratingID)
+);
+
 CREATE TABLE Game (
 	gameID INTEGER, 
 	title VARCHAR(128) NOT NULL,
@@ -9,10 +16,12 @@ CREATE TABLE Game (
 	releaseYear INTEGER NOT NULL,
 	coverImage MEDIUMBLOB DEFAULT NULL,
 	imageType VARCHAR(16) DEFAULT NULL,
-	rating CHAR DEFAULT NULL,
+	ratingID INTEGER NOT NULL,
 	dateAdded DATE NOT NULL,
 	
-	PRIMARY KEY Game(gameID)
+	PRIMARY KEY Game(gameID),
+	FOREIGN KEY (ratingID)
+	REFERENCES ESRB(ratingID)
 );
 
 CREATE TABLE Genre (
@@ -33,8 +42,8 @@ CREATE TABLE Console (
 ); 
 
 CREATE TABLE Developer (
-	developerID INTEGER AUTO_INCREMENT,
 	developerName VARCHAR(128) UNIQUE NOT NULL,
+	developerID INTEGER AUTO_INCREMENT,
 	
 	PRIMARY KEY Developer(developerID)
 );
@@ -94,6 +103,13 @@ CREATE TABLE GenreGame (
 		ON DELETE CASCADE
 );
 
+INSERT INTO ESRB (ratingID, ratingName)
+VALUES (1, 'E'),
+	   (2, 'E10'),
+	   (3, 'T'),
+	   (4, 'M'),
+	   (5, 'RP');
+
 INSERT INTO Console (consoleID, consoleName, consoleFirstParty, consoleReleaseYear, isHandheld)
 VALUES (1, 'Xbox', 'Microsoft', '2001', b'0'),
 	   (2, 'Xbox 360', 'Microsoft', '2005', b'0'),
@@ -123,22 +139,7 @@ VALUES (1, 'FromSoftware'),
 	   (12, 'Namco'),
 	   (13, 'Simogo'),
 	   (14, 'Intelligent Systems');
-		   
-INSERT INTO Game (gameId, title, region, releaseYear, rating, dateAdded)
-VALUES (1, 'Dark Souls', 'US', 2011, 'M', '2015-6-20'),
-	   (2, 'Final Fantasy Tactics: The War of the Lions', 'NA', 2007, 'T', '2015-6-20'),
-	   (3, 'Robin Hood: The Legend of Sherwood', 'NA', 2002, 'T', '2015-6-20'),
-	   (4, 'Dragon Warrior Monsters', 'NA', 2000, 'E', '2015-6-20'),
-	   (5, 'Advance Wars', 'NA', 2001, 'E', '2015-6-20'),
-	   (6, 'Hotel Dusk Room 215', 'NA', 2007, 'T', '2015-6-20'),
-	   (7, 'Bond 007: Nightfire', 2002, 'NA', 'T', '2015-6-20'),
-	   (8, 'Trauma Center: Second Opinion', 'NA', 2006, 'T', '2015-6-20'),
-	   (9, 'Raze''s Hell', 'NA', 2005, 'T', '2015-6-20'),
-	   (10, 'Chromehounds', 'NA', 2006, 'T', '2015-6-20'),
-	   (11, 'Legend of Dragoon', 'NA', 2000, 'T', '2015-6-20'),
-	   (12, 'Katamari Damacy', 'NA', 2004, 'E', '2015-6-20'),
-	   (13, 'Year Walk', 'NA', 2004, 'T', '2015-6-20');
-
+		  
 INSERT INTO Genre (genreID, genreName)
 VALUES (1, 'RPG'),
 	   (2, 'Hack ''n Slash'),
@@ -156,6 +157,55 @@ VALUES (1, 'RPG'),
 	   (14, 'Genre-Buster'),
 	   (15, 'Horror');
 
+INSERT INTO Game (gameId, title, region, releaseYear, ratingID, dateAdded)
+VALUES (1, 'Dark Souls', 'US', 2011, 4, '2015-6-20'),
+	   (2, 'Final Fantasy Tactics: The War of the Lions', 'NA', 2007, 3, '2015-6-20'),
+	   (3, 'Robin Hood: The Legend of Sherwood', 'NA', 2002, 3, '2015-6-20'),
+	   (4, 'Dragon Warrior Monsters', 'NA', 2000, 1, '2015-6-20'),
+	   (5, 'Advance Wars', 'NA', 2001, 1, '2015-6-20'),
+	   (6, 'Hotel Dusk Room 215', 'NA', 2007, 3, '2015-6-20'),
+	   (7, 'Bond 007: Nightfire', 2002, 'NA', 3, '2015-6-20'),
+	   (8, 'Trauma Center: Second Opinion', 'NA', 2006, 3, '2015-6-20'),
+	   (9, 'Raze''s Hell', 'NA', 2005, 3, '2015-6-20'),
+	   (10, 'Chromehounds', 'NA', 2006, 3, '2015-6-20'),
+	   (11, 'Legend of Dragoon', 'NA', 2000, 3, '2015-6-20'),
+	   (12, 'Katamari Damacy', 'NA', 2004, 1, '2015-6-20'),
+	   (13, 'Year Walk', 'NA', 2004, 3, '2015-6-20');
+	   
+INSERT INTO Publisher (publisherID, publisherName)
+VALUES (1, 'FromSoftware'),
+       (2, 'Bandai'),
+	   (3, 'Square Enix'),
+	   (4, 'Strategy First'),
+	   (5, 'Enix'),
+	   (6, 'Eidos Interactive'),
+	   (7, 'Nintendo'),
+	   (8, 'Electronic Arts'),
+	   (9, 'Atlus'),
+	   (10, 'Majesco Entertainment'),
+	   (11, 'Sega'),
+	   (12, 'Sony Computer Entertainment'),
+	   (13, 'Namco'),
+	   (14, 'Simogo');
+
+INSERT INTO PublisherGame (gameID, publisherID)
+VALUES (1, 1),
+	   (1, 2),
+	   (2, 3),
+	   (3, 4),
+	   (4, 5),
+	   (4, 6),
+	   (5, 7),
+	   (6, 7),
+	   (7, 8),
+	   (8, 9),
+	   (9, 10),
+	   (10, 1),
+	   (10, 11),
+	   (11, 12),
+	   (12, 13),
+	   (13, 14);
+	   
 INSERT INTO GenreGame(gameID, genreID)
 VALUES (1, 1),
 	   (1, 2),

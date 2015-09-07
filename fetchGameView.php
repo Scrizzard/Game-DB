@@ -39,13 +39,15 @@ echo '</div>';
 ******************************************************************************/
 
 function displayBasic($conn, $gameID){
-	$fetchQuery = "SELECT * FROM Game WHERE gameID = " . $gameID . ";";
+	$fetchQuery = "SELECT * FROM Game " .
+				   "JOIN ESRB ON Game.ratingID = ESRB.ratingID " .
+				   "WHERE gameID = " . $gameID . ";";
 	$result = doQuery($conn, $fetchQuery);
 	
 	$row = $result->fetch_assoc();
 	$title = $row["title"];
 	$releaseYear = $row["releaseYear"];
-	$rating = $row["rating"];
+	$rating = $row["ratingName"];
 	$region = $row["region"];
 	
 	
