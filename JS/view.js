@@ -156,6 +156,6 @@ function decrementName(ele, trimLength){
 }
 
 //placeholder for when I make a nicer version
-function makePopup(message){
+function createPopup(message){
 	alert(message);
 }

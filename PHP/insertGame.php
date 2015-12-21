@@ -3,22 +3,28 @@
 /******************************************************************************
 * Driver (Insert all the game bits)
 ******************************************************************************/
-
-if (validGame()) {
-	$largestID = getLargestGameId($conn);
-	insertGame($largestID, $conn);
-
-	insertFields($conn, $largestID, 'genre');
-	insertFields($conn, $largestID, 'publisher');
-	insertFields($conn, $largestID, 'developer');
-	insertEntryGamePair($conn, $_POST["gameConsole"], $largestID, 'console');
-		
-	makePopup("Transaction successful!");
-}
-else{
-	//makePopup("Missing fields, transaction failed!");
+if(isset($_POST["submitted"])){
+    tryInsertGame($conn);
 }
 
+function tryInsertGame($conn){
+    $validationErrors = getValidationErrors();
+    
+    if (count($validationErrors) == 0) {
+    	$largestID = getLargestGameId($conn);
+    	$success = insertGame($largestID, $conn);
+    
+    	insertFields($conn, $largestID, 'genre');
+    	insertFields($conn, $largestID, 'publisher');
+    	insertFields($conn, $largestID, 'developer');
+    	insertEntryGamePair($conn, $_POST["gameConsole"], $largestID, 'console');
+    	
+    	requestPopup("Transaction successful!");
+    }
+    else{
+    	requestPopup("You have some problems!\\n\\t" . join('\n\t', $validationErrors));
+    }
+}
 ?>
 
 <?php
@@ -62,15 +68,11 @@ function insertGame($largestID, $conn) {
 	if(is_null($rating)){
 		$rating = '?';
 	}
-	
-	//check for valid image
-	if(validImage($image)){
-		$blob = '"' . imageToBlob($image) . '"';
-		$mime = '"' . $image["type"] . '"';
-	}
-	else{
-		////makePopup("Bad or oversized image!");
-	}
+
+    if($image["error"] != UPLOAD_ERR_NO_FILE){
+        $blob = '"' . imageToBlob($image) . '"';
+        $mime = '"' . $image["type"] . '"';
+    }
 	
 	$insertQuery = "INSERT INTO Game (gameID, title, releaseYear, ratingID, priceURL, dateAdded, coverImage, imageType) " . 
 			 "VALUES (" . $largestID . ", " . $title . ", " . $releaseYear . ", " . $rating . ", " . $priceURL . ", " . $today . ", " . $blob . ", " . $mime . ");";
@@ -135,18 +137,37 @@ function getEntryId($conn, $entry, $baseName){
 * Misc./Utiltiy
 ******************************************************************************/
 
-function validGame() {
-	
-	$hasTitle = isset($_POST["title"]) && $_POST["title"] != "";
-	$hasReleaseYear = isset($_POST["releaseYear"]) && $_POST["releaseYear"] != "";
-	$hasRegion = isset($_POST["region"]) && $_POST["region"] != "";
-	$hasPublisher = isset($_POST["publisher1"]) && $_POST["publisher1"] != "";
-	$hasDeveloper = isset($_POST["developer1"]) && $_POST["developer1"] != "";
-	$hasGenre = isset($_POST["genre1"]) && $_POST["genre1"] != "";
-	$hasPlatform = isset($_POST["platform1"]) && $_POST["platform1"] != "";
-	
-	return $hasTitle && $hasReleaseYear && $hasDeveloper && $hasGenre && $hasRegion;
-	
+function getValidationErrors() {
+    $problems = array();
+
+	if(!isset($_POST["title"]) || $_POST["title"] == ""){
+	   $problems[] = "Missing game title";
+	}
+	if(!isset($_POST["releaseYear"]) || $_POST["releaseYear"] == ""){
+	    $problems[] = "Missing year of release";
+	}
+	if(!isset($_POST["region"]) || $_POST["region"] == ""){
+	    $problems[] = "Missing release region";
+	}
+	if(!isset($_POST["publisher1"]) || $_POST["publisher1"] == ""){
+        $problems[] = "Missing game publisher";	    
+	}
+	if(!isset($_POST["developer1"]) || $_POST["developer1"] == ""){
+           $problems[] = "Missing game developer";
+	}
+	if(!isset($_POST["genre1"]) || $_POST["genre1"] == ""){
+	    $problems[] = "Missing game genre";
+	}
+	if(!isset($_POST["gameConsole"]) || $_POST["gameConsole"] == ""){
+	    $problems[] = "Missing game platform";
+	}
+
+    $image = $_FILES["coverImage"];
+    if(!validImage($image) && $image["error"] != UPLOAD_ERR_NO_FILE){
+        $problems[] = "Invalid image - size or type not supported";
+    }
+    
+    return $problems;
 }
 
 function validImage($image){

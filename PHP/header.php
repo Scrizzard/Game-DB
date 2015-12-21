@@ -36,10 +36,10 @@ function doQuery($conn, $query){
 }
 
 //display an all-purpose popup alert
-function makePopup($message){
+function requestPopup($message){
 
-	if(isset($_GET["submitted"])){
-		$scriptString = '<script type="text/javascript">makePopup("' . $message . '");</script>';
+	if(isset($_POST["submitted"])){
+		$scriptString = '<script type="text/javascript">createPopup("' . $message . '");</script>';
 		echo $scriptString;
 	}
 }

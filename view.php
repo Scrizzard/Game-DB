@@ -46,7 +46,7 @@
 
 						<div class="line"></div>
 
-						<form action="view.php?submitted=yup" method="post" enctype="multipart/form-data">
+						<form action="view.php" method="post" enctype="multipart/form-data">
 
 							<div class="scrollbox">
 
@@ -96,22 +96,6 @@
 									<input type="text" name="region">
 								</div>
 
-								<div>
-									<p class="fieldTitle">
-										Image URL
-									</p>
-									<br/>
-									<input id="imageInput" type="file" name="coverImage">
-								</div>
-
-								<div>
-									<p class="fieldTitle">
-										Pricing URL
-									</p>
-									<br/>
-									<input id="priceInput" type="text" name="price">
-								</div>
-
 								<div id="publisherInputWrapper">
 									<p class="fieldTitle">
 										Publisher
@@ -147,10 +131,27 @@
 									<input type="text" name="genre1">
 									<br/>
 								</div>
+								<div>
+									<p class="fieldTitle">
+										Image <span class="unbold">(optional)</span>
+									</p>
+									<br/>
+									<input id="imageInput" type="file" name="coverImage">
+								</div>
+
+								<div>
+									<p class="fieldTitle">
+										Pricing URL <span class="unbold">(optional)</span>
+									</p>
+									<br/>
+									<input id="priceInput" type="text" name="price">
+								</div>
+
 							</div>
 
 							<div class="line"></div>
 
+							<input type="checkbox" name="submitted" checked class="hidden">
 							<input id="submit" type="submit" value="Submit">
 
 						</form>

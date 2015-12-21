@@ -2,17 +2,18 @@ TODO:
 	
 make a better "transaction complete" popup
 
-add a way to quickly edit info
+add a way to quickly edit info (move the delete button onto the edit page)
 
 region should be category
 
-gracefully handle empty input
+gracefully handle empty input (on what?)
 
 add a readme.txt (explain DB table/attr naming scheme)
 
-explain why queries fail to go through on bad input
+fix the price fetching system (use the api instead of regex)
 
-fix the price fetching system
+resize images in the game view so they have a maximum height proportional to the screen
+(this doesn't seem to work so great with % values. convert to flex boxes first)
 
 STRETCH:
 

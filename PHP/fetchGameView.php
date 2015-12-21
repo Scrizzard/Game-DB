@@ -141,13 +141,14 @@ function displayImage($conn, $gameID){
 ******************************************************************************/
 
 function createImgTag($rawImage, $type){
+  echo $type;
   if(empty($rawImage)){
   	return "<p>image not found</p>";
   }
   
   else{ //$rawImage is not NULL
     $base64 = base64_encode($rawImage); 
-  	$html = '<img class="gameImage" src="' . $source . '"/>';
+  	$html = '<img class="gameImage" src="data:' . $type . ';base64,' . $base64 . '"/>';
   	return $html;
   }
 }
